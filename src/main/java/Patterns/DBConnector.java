@@ -3,13 +3,19 @@ package Patterns;
 import java.sql.*;
 
 public class DBConnector {
-    public static void main(String[] a) {
-        
+    Connection m_Connector = null;
+    Statement m_Statement = null;
+
+    public boolean CreateDatabaseConnector() {
+        // Maybe we got connection or not
+        boolean success = false;
+
+        // Try getting the SQL driver
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getCause());
+            return false;
         }
 
         // Credentials and URL
@@ -17,16 +23,21 @@ public class DBConnector {
         String user_name = "admin";
         String password = "12345";
 
-        try (
-            Connection con = DriverManager.getConnection(url, user_name, password);
-                Statement statement = con.createStatement();
-                ResultSet res_set = statement.executeQuery("use EcoGreen1");
-        ) {
-                    System.out.print("Connection established!\n");
-
+        // Try to establish a connection, if failed, show the problem
+        try {
+            Connection con = DriverManager.getConnection(url, user_name, password);Statement statement = con.createStatement();
+            System.out.print("Connection established!\n");
+            this.m_Connector = con;
+            this.m_Statement = statement;
+            success = true;
+        } catch (Exception e) {
+            System.out.print("Connection failed: " + e + "\n");
         }
-        catch(Exception e){
-            System.out.println(e);
-        }
+        return success;
     }
+    
+    public Connection GetConnector() {
+        return this.m_Connector;
+    }
+
 }
