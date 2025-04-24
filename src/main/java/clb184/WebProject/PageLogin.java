@@ -1,14 +1,10 @@
 package clb184.WebProject;
 
 import java.sql.*;
-
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.fasterxml.jackson.databind.ser.std.UUIDSerializer;
-
 import Patterns.DBConnector;
 
 @CrossOrigin
