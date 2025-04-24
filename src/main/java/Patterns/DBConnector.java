@@ -4,7 +4,6 @@ import java.sql.*;
 
 public class DBConnector {
     Connection m_Connector = null;
-    Statement m_Statement = null;
 
     public boolean CreateDatabaseConnector() {
         // Maybe we got connection or not
@@ -25,10 +24,9 @@ public class DBConnector {
 
         // Try to establish a connection, if failed, show the problem
         try {
-            Connection con = DriverManager.getConnection(url, user_name, password);Statement statement = con.createStatement();
+            Connection con = DriverManager.getConnection(url, user_name, password);
             System.out.print("Connection established!\n");
             this.m_Connector = con;
-            this.m_Statement = statement;
             success = true;
         } catch (Exception e) {
             System.out.print("Connection failed: " + e + "\n");
