@@ -1,0 +1,3 @@
+[submodule "deps/JavaStuff"]
+	path = deps/JavaStuff
+	url = https://github.com/Clb184/JavaStuff
