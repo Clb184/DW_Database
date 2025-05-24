@@ -5,7 +5,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
-import Patterns.DBConnector;
+
+import Clb184.SQL.CSQLServerDriver;
+import Clb184.SQL.ISQLDriver;
 
 @CrossOrigin
 @RestController
@@ -13,8 +15,8 @@ public class PageLogin {
     
     @GetMapping("/login")
     public boolean LogIn(@RequestParam String name, @RequestParam String password) {
-        DBConnector connector = new DBConnector();
-        connector.CreateDatabaseConnector();
+        ISQLDriver connector = new CSQLServerDriver();
+        connector.CreateConnector();
         ResultSet set = null;
         boolean ret = false;
         try {
