@@ -16,13 +16,17 @@ public class PageLogin {
     @GetMapping("/login")
     public boolean LogIn(@RequestParam String name, @RequestParam String password) {
         ISQLDriver connector = new CSQLServerDriver();
-        connector.CreateConnector();
         ResultSet set = null;
         boolean ret = false;
+        
+        // Create the connector and check if connected succesfuly
+        if (false == connector.CreateConnector()) return false;
+        
+        // Try to log in
         try {
             Statement statement = connector.GetConnector().createStatement();
             statement.execute("use EcoGreen1;");
-            set = statement.executeQuery("select nombre, contraseña from Usuarios where contraseña = \'" +  password + "\' and nombre = \'" + name + "\'");
+            set = statement.executeQuery("select nombre, contraseña from Usuarios where contraseña = \'" + password + "\' and nombre = \'" + name + "\';");
             if(set.next()){
                 System.out.print("Successful login\n");
                 ret = true;
