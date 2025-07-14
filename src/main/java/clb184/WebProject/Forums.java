@@ -72,7 +72,7 @@ public class Forums {
         // Try to log in
         try {
             Statement statement = connector.GetConnector().createStatement();
-            statement.execute("use EcoGreen;");
+            statement.execute("use EcoGreen;"); // Name of database
             statement.execute("insert into Foros (titulo, contenido) values (\'" + title + "\', \'" + contents +"\');");
         } catch (Exception e) {
             System.err.print("Error executing query: " + e + "\n");
