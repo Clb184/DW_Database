@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import Clb184.SQL.CSQLServerDriver;
+import Clb184.SQL.CMySQLDriver;
 import Clb184.SQL.ISQLDriver;
 
 @CrossOrigin
@@ -33,7 +33,7 @@ public class Forums {
      */
     @GetMapping("/get_forum_data")
     public String GetForumData() {
-        ISQLDriver connector = new CSQLServerDriver();
+        ISQLDriver connector = new CMySQLDriver();
         ResultSet set = null;
         String jsonified = "{\n\t\"data\": [";
 
@@ -44,7 +44,7 @@ public class Forums {
         // Try to log in
         try {
             Statement statement = connector.GetConnector().createStatement();
-            statement.execute("use EcoGreen1;");
+            statement.execute("use EcoGreen;");
             set = statement.executeQuery("select * from Foros;");
 
             while (set.next()) {
@@ -64,8 +64,7 @@ public class Forums {
 
     @GetMapping("/create_post")
     public void CreatePost(@RequestParam String title, @RequestParam String contents) {
-        ISQLDriver connector = new CSQLServerDriver();
-        ResultSet set = null;
+        ISQLDriver connector = new CMySQLDriver();
         
         // Create the connector and check if connected succesfuly
         if (false == connector.CreateConnector()) return;
@@ -73,7 +72,7 @@ public class Forums {
         // Try to log in
         try {
             Statement statement = connector.GetConnector().createStatement();
-            statement.execute("use EcoGreen1;");
+            statement.execute("use EcoGreen;");
             statement.execute("insert into Foros (titulo, contenido) values (\'" + title + "\', \'" + contents +"\');");
         } catch (Exception e) {
             System.err.print("Error executing query: " + e + "\n");

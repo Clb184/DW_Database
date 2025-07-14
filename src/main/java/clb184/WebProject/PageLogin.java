@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import Clb184.SQL.CSQLServerDriver;
+import Clb184.SQL.CMySQLDriver;
 import Clb184.SQL.ISQLDriver;
 
 @CrossOrigin
@@ -15,7 +15,7 @@ public class PageLogin {
     
     @GetMapping("/login")
     public boolean LogIn(@RequestParam String name, @RequestParam String password) {
-        ISQLDriver connector = new CSQLServerDriver();
+        ISQLDriver connector = new CMySQLDriver();
         ResultSet set = null;
         boolean ret = false;
         
@@ -25,7 +25,7 @@ public class PageLogin {
         // Try to log in
         try {
             Statement statement = connector.GetConnector().createStatement();
-            statement.execute("use EcoGreen1;");
+            statement.execute("use EcoGreen;");
             set = statement.executeQuery("select nombre, contraseña from Usuarios where contraseña = \'" + password + "\' and nombre = \'" + name + "\';");
             if(set.next()){
                 System.out.print("Successful login\n");

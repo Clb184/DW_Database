@@ -10,9 +10,9 @@ public class WebProjectApplication {
 
 	// Initalize with some credentials
 	public static void InitializeDatabaseDriver() {
-		ISQLDriver.SetCredentials("admin", "12345");
-		ISQLDriver.SetServerURL("localhost", 50132);
-		ISQLDriver.SetDatabaseName("EcoGreen1");
+		ISQLDriver.SetCredentials("Admin", "12345");
+		ISQLDriver.SetServerURL("192.168.100.170");
+		ISQLDriver.SetDatabaseName("EcoGreen");
 	}
 
 	public static void main(String[] args) {
